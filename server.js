@@ -7,7 +7,7 @@ var app = express();
 const PORT = process.env.PORT || 3000;
 
 // force to enable http otherwise is not
-if (isNaN(PORT)) {
+if (PORT !== 3000) {
   app.use(function (req, res, next){
     if (req.headers['x-forwarded-proto'] === 'http') {
       next();
