@@ -6,14 +6,17 @@ var app = express();
 // PORT HEROKU
 const PORT = process.env.PORT || 3000;
 
-// force to enable https otherwise is not
-app.use(function (req, res, next){
-  if (req.headers['x-forwarded-proto'] === 'http') {
-    next();
-  } else {
-    res.redirect('http://' + req.hostname + req.url);
-  }
-});
+// force to enable http otherwise is not
+if (isNaN(PORT)) {
+  app.use(function (req, res, next){
+    if (req.headers['x-forwarded-proto'] === 'http') {
+      next();
+    } else {
+      res.redirect('http://' + req.hostname + req.url);
+    }
+  });
+}
+
 
 app.use(express.static('public'));
 
