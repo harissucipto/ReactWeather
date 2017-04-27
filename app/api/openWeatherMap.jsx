@@ -4,6 +4,7 @@ const OPEN_WEATHER_MAP_URL = 'http://api.openweathermap.org/data/2.5/weather?app
 
 // e08bd5875ec2ca538972b7e2aff1d273
 
+// return object
 module.exports = {
   getTemp: function(location) {
     var encodedLocation = encodeURIComponent(location);
@@ -15,8 +16,8 @@ module.exports = {
       } else {
         return res.data.main.temp;
       }
-    }, function(err) {
-      throw new Error(err.data.message);
+    }, function(res) {
+      throw new Error(res.message);
     });
   }
 }
